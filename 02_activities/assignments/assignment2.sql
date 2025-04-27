@@ -1,4 +1,4 @@
-/* ASSIGNMENT 2 */
+/* ASSIGNMENT 2 Sucharitha S*/
 /* SECTION 2 */
 
 -- COALESCE
@@ -43,12 +43,12 @@ then write another query that uses this one as a subquery (or temp table) and fi
 only the customer’s most recent visit. */
 
 select x.customer_id, x.market_Date as recent_market_visit from
-(select *, row_number() over (partition by customer_id order by market_Date desc) as market_visit_count from customer_purchases) x
+(select market_date,customer_id, row_number() over (partition by customer_id order by market_Date desc) as market_visit_count from customer_purchases) x
 where x.market_visit_count = 1;
 
 /* 3. Using a COUNT() window function, include a value along with each row of the 
 customer_purchases table that indicates how many different times that customer has purchased that product_id. */
-select *,count() over (partition by customer_id,product_id) from customer_purchases;
+select *,count() over (partition by customer_id,product_id) as purchased_count from customer_purchases;
 
 -- String manipulations
 /* 1. Some product names in the product table have descriptions like "Jar" or "Organic". 
@@ -142,7 +142,7 @@ VALUES(24, 'Sweet Corn', 'Ear',1, 'unit',current_timestamp);
 /* 1. Delete the older record for the whatever product you added. 
 HINT: If you don't specify a WHERE clause, you are going to have a bad time.*/
 
-delete from product_units where product_id ='24';
+delete from product_units where product_id =24;
 
 -- UPDATE
 /* 1.We want to add the current_quantity to the product_units table. 
@@ -182,5 +182,3 @@ UPDATE product_units
 SET current_quantity = plq.quantity
 FROM product_last_quantity plq
 WHERE product_units.product_id = plq.product_id;
-
-
