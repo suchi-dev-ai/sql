@@ -56,7 +56,9 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 ```
 Your answer...
 ```
+The Customer Address table that will retain changes is type 2 SCD where apart from storing the Customer_ID,Customer_Name,Customer_Address_line_1 , Customer_Address_Line_2 ,City, State,Country and Pincode, the table would also have columns to track changes made to the record, such as Customer_Address_Active_Flag, Customer_Addr_Start_Date and Customer_Addr_End_date.
 
+The Customer Address table that will overwrite changes is type 1 SCD where each record will be overwritten with columns such as the Customer_Name,Customer_Address_line_1 , Customer_Address_Line_2 ,City, State,Country and Pincode.The CustomerID column would be the primary key that cannot be overwritten.
 ***
 
 ## Section 2:
